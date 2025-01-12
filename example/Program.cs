@@ -1,6 +1,9 @@
-﻿using src.Models;
-using src.Models.Abstractions;
-using src.Services.QueryProcessor;
+﻿// ============================================================
+// File Name: Program.cs
+// Created On: 12-01-2025
+// Description: Code in this folder represents a simple example
+// of how to use project from src folder.
+// ============================================================
 
 namespace example;
 

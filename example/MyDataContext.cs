@@ -1,6 +1,4 @@
-
 using src.Models;
-using src.Models.Abstractions;
 
 namespace example;
 
