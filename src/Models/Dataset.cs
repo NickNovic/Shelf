@@ -16,6 +16,11 @@ public class Dataset<T> : IDataset<T>, IQueryable<T>, IQueryable, IEnumerable<T>
     
     public IQueryProvider Provider { get; }
     
+    public Dataset()
+    {
+        Provider = new QuerryProvider();
+        Expression = Expression.Constant(this);
+    }
     public Dataset(IQueryProvider provider, Expression expression)
     {
         Provider = provider; 
