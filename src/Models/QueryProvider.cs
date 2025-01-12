@@ -1,8 +1,16 @@
+// ============================================================
+// File Name: QueryProvider.cs
+// Created On: 12-01-2025
+// This class is used to manage LINQ queries.
+// It implements IQueryProvider interface for LINQ queries.
+// ============================================================ 
+
 using System.Data;
 using System.Linq.Expressions;
 using src.Models;
+using src.Services.QueryProcessor;
 
-public class QuerryProvider : IQueryProvider
+internal class QuerryProvider : IQueryProvider
 {
     public IQueryable CreateQuery(Expression expression)
     {
@@ -24,7 +32,16 @@ public class QuerryProvider : IQueryProvider
 
     public TResult Execute<TResult>(Expression expression)
     {
+        if(expression is not MethodCallExpression){
+            throw new ArgumentException("Expression must be a method call expression");
+        }
+
+        ReadQueryProcessor readQueryProcessor = new();
+        var query = readQueryProcessor.Read(expression);
+        
         // Custom logic for query execution (e.g., database or API call)
-        throw new NotImplementedException();
+
+        // This is a dummy implementation for demonstration purposes.
+        return (TResult)(new List<int>()).AsQueryable();
     }
 }
