@@ -1,9 +1,6 @@
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
+# Ignore all .vscode folders
+*/.vscode/*
+.vscode/
 
 # Local History for Visual Studio Code
 .history/
