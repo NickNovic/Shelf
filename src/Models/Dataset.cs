@@ -10,7 +10,7 @@ using src.Models.Abstractions;
 
 namespace src.Models;
 
-public class Dataset<T> : IDataset<T>, IQueryable<T>, IQueryable, IEnumerable<T>, IEnumerable where T : class
+public class Dataset<T> : IDataset<T>, IQueryable<T>, IQueryable, IEnumerable<T>, IEnumerable
 {
     public Expression Expression { get; }
     
