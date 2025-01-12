@@ -13,10 +13,7 @@
 // "A query is an expression that retrieves data from a data source."
 // So, operations like Add(), Remove(), Update() are not(and I hope never would be)
 // included in LINQ.
-// 
 // ============================================================
-
-using System.Linq.Expressions;
 
 namespace src.Models.Abstractions;
 
