@@ -47,11 +47,6 @@ public class Dataset<T> : IDataset<T>, IQueryable<T>, IQueryable, IEnumerable<T>
         throw new NotImplementedException();
     }
 
-    public void Update(T entity)
-    {
-        throw new NotImplementedException();
-    }
-
     public void AddAsync(T entity)
     {
         throw new NotImplementedException();
@@ -78,11 +73,6 @@ public class Dataset<T> : IDataset<T>, IQueryable<T>, IQueryable, IEnumerable<T>
     }
 
     public void RemoveRangeAsync(IEnumerable<T> entityes)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void UpdateAsync(T entity)
     {
         throw new NotImplementedException();
     }

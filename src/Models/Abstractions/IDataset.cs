@@ -28,8 +28,6 @@ public interface IDataset<T> : IQueryable<T>, IQueryable
     public void RemoveAsync(T entity);
     public void RemoveRange(IEnumerable<T> entityes);
     public void RemoveRangeAsync(IEnumerable<T> entityes);
-    public void Update(T entity);
-    public void UpdateAsync(T entity);
     public void SaveChanges();
     public void SaveChangesAsync();
     
