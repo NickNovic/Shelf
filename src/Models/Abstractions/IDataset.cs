@@ -16,8 +16,11 @@
 // ============================================================
 
 namespace src.Models.Abstractions;
-
-public interface IDataset<T> : IQueryable<T>, IQueryable
+public interface IDataset
+{
+    public string Name { get; init;}
+}
+public interface IDataset<T> : IDataset, IQueryable<T>, IQueryable
 {
     // I think Async methods sometimes would cause problems
     public void Add(T entity);
