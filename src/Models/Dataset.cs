@@ -12,6 +12,7 @@ namespace src.Models;
 
 public class Dataset<T> : IDataset<T>, IQueryable<T>, IQueryable, IEnumerable<T>, IEnumerable
 {
+    public string Name { get; init; }
     public Expression Expression { get; }
     
     public IQueryProvider Provider { get; }
@@ -21,12 +22,20 @@ public class Dataset<T> : IDataset<T>, IQueryable<T>, IQueryable, IEnumerable<T>
         Provider = new QuerryProvider();
         Expression = Expression.Constant(this);
     }
+
     public Dataset(IQueryProvider provider, Expression expression)
     {
         Provider = provider; 
         Expression = expression;
     }
 
+    public Dataset(string name)
+    {
+        Name = name;
+        Provider = new QuerryProvider();
+        Expression = Expression.Constant(this);
+    }
+    
     public IEnumerator<T> GetEnumerator()
     {
         return Provider.Execute<IEnumerable<T>>(Expression).GetEnumerator();
