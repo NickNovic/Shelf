@@ -5,6 +5,8 @@
 // connect to the database and execute queries.
 // ============================================================
 
+using src.Models.Abstractions;
+
 namespace src.Models;
 
 public abstract class DataContext : IDisposable
@@ -12,6 +14,8 @@ public abstract class DataContext : IDisposable
     public DataContext()
     {
         Setup();
+        SetNamesForTables();
+
     }
 
     public virtual void Dispose()
@@ -29,5 +33,22 @@ public abstract class DataContext : IDisposable
     public virtual void Disconnect()
     {
         Console.WriteLine("Disconnect");
+    }
+
+    // this method works via reflection in runtime, what is kinda bad
+    // In future, I will try to use reflection in compile time
+    private void SetNamesForTables(){
+        
+        var props = GetType().GetProperties();
+        foreach(var prop in props)
+        {
+            if(prop.PropertyType.IsAssignableTo(typeof(IDataset)))
+            {
+                //var dataset = Activator.CreateInstance(prop.PropertyType) as IDataset;
+                prop.SetValue(this, Activator.CreateInstance(prop.PropertyType, prop.Name) as IDataset);
+                //dataset.Name = prop.Name;
+                //Console.WriteLine(prop..Name);
+            }
+        }
     }
 }
