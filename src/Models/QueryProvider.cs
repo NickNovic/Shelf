@@ -38,7 +38,7 @@ internal class QuerryProvider : IQueryProvider
 
         ReadQueryProcessor readQueryProcessor = new();
         var query = readQueryProcessor.Read(expression);
-        
+        System.Console.WriteLine(query);
         // Custom logic for query execution (e.g., database or API call)
 
         // This is a dummy implementation for demonstration purposes.

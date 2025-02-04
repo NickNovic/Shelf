@@ -6,28 +6,35 @@
 // ============================================================
 
 using System.Linq.Expressions;
+using src.Models;
+using src.Models.Abstractions;
 
 namespace src.Services.QueryProcessor;
 
 public class ReadQueryProcessor : IQueryProcessor
 {
+    private readonly ReadQueryBuilder _readQueryBuilder = new();
+    
     public string Read(Expression expression)
     {
         if(expression is not MethodCallExpression){
-            throw new ArgumentException("Expression must be a method call expression");
+            throw new ArgumentException("Invalid expression");
         }
         
-        var methodExpression = expression as MethodCallExpression;
+        var methodCallExpression = expression as MethodCallExpression;
+        var methodName = methodCallExpression.Method.Name;
 
-        string query = "";
-        if(methodExpression.Method.Name == "Where")
+        if(methodCallExpression.Arguments.First() is not ConstantExpression)
         {
-            string lambda = ReadLambda(methodExpression.Arguments[1]);
-            query = "WHERE" + " " + lambda;
+            Read(methodCallExpression.Arguments.First());
+        }else{
+            var constant = methodCallExpression.Arguments.First() as ConstantExpression;
+            var dataset = (IDataset)constant.Value;
+            _readQueryBuilder.SetFROM(dataset.Name);
+            System.Console.WriteLine(_readQueryBuilder.BuildQuery());
         }
-        
-        Console.WriteLine(query);
-        return query;
+
+        return _readQueryBuilder.BuildQuery();
     }
 
     private string ReadLambda(Expression expression)
